@@ -22,6 +22,7 @@ db.once("open",()=>{
 })
 
 require("./Routes/userRoutes")(app);
+require("./Routes/authRoutes")(app);
 
 app.listen(serverConfig.PORT,()=>{
     console.log(`Application running on port ${serverConfig.PORT}`);
