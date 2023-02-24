@@ -1,6 +1,8 @@
 const { userStatus, userTypes } = require("../utils/constants");
 const User = require("../Models/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const authConfigs = require("../configs/auth.config");
 
 
 exports.signUp = async (req,res)=>{
@@ -53,6 +55,14 @@ exports.signIn = async (req,res)=>{
         return res.status(401).send({message:"Invalid password!"});
     }
 
-
-    res.send(user);
+    var token = jwt.sign({id:user.userId},authConfigs.secret, {expiresIn:86400});
+    
+    res.status(200).send({
+        name:user.name,
+        userId:user.userId,
+        email:user.email,
+        userType:user.userTypes,
+        userStatus:user.userStatus,
+        accessToken: token
+    })
 }
