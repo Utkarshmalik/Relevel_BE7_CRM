@@ -1,5 +1,6 @@
 const User = require("../Models/user");
 const bcrypt = require("bcrypt");
+const { userStatus } = require("../utils/constants");
 
 exports.createUser = async (req,res)=>{
 
@@ -44,4 +45,19 @@ exports.getUserById = async (req,res) =>{
     catch(e){
         return res.status(500).send({message:"Internal server error"+e});
     }
+}
+
+exports.updateUser = async (req,res)=>{
+
+    const userToBeUpdated = req.params.id;
+
+    const savedUser = await User.findOne({_id:userToBeUpdated});
+
+    if(req.body.status === userStatus.approved){
+        savedUser.userStatus = userStatus.approved;
+    }
+
+    const updatedUser = await savedUser.save();
+
+    return res.status(200).send(updatedUser);
 }

@@ -20,7 +20,7 @@ exports.signUp = async (req,res)=>{
         name:req.body.name,
         userId:req.body.userId,
         email:req.body.email,
-        userType:req.body.userType,
+        userTypes:req.body.userType,
         userStatus:status,
         password:bcrypt.hashSync(req.body.password, 8)
     }
