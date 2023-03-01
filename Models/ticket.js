@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ticketStatus } = require("../utils/constants");
 
 const ticketSchema = new mongoose.Schema({
 
@@ -18,7 +19,7 @@ const ticketSchema = new mongoose.Schema({
     status:{
         type:String,
         required:true,
-        default:"OPEN"
+        default:ticketStatus.open
     },
     requestor:{
         type:String
