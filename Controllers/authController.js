@@ -3,7 +3,8 @@ const User = require("../Models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authConfigs = require("../configs/auth.config");
-
+const {sendEmail} = require("../utils/NotificationClient");
+const {userRegistration} = require("../script/authScripts");
 
 exports.signUp = async (req,res)=>{
 
@@ -27,7 +28,13 @@ exports.signUp = async (req,res)=>{
 
     try{
     const user = await User.create(userObj);
-    
+
+    //send the notification to the registered email that you are registered succesfully
+
+    const {subject,html,text} = userRegistration(user);
+
+    sendEmail([user.email],subject,html,text);
+
     res.status(201).send(user)
 
     }
