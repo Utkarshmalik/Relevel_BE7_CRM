@@ -1,12 +1,13 @@
-
-
 const express = require("express");
 const mongoose = require("mongoose");
 const dbConfig = require("./configs/db.config");
 const serverConfig = require("./configs/server.config");
 const bodyParser = require("body-parser");
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors());
 
 mongoose.connect(dbConfig.DB_URL);
 const db = mongoose.connection;
