@@ -11,5 +11,5 @@ module.exports = (app)=>{
     app.post("/crm/api/v1/tickets",[verifyToken,validateTicketRequestBody],createTicket)
     app.get("/crm/api/v1/tickets",[verifyToken],geAllTickets);
     app.get("/crm/api/v1/tickets/:id",[verifyToken],getTicketById);
-    app.put("/crm/api/v1/tickets/:id",[verifyToken,validateTicketRequestStatus],updateTicketById)
+    app.put("/crm/api/v1/tickets/:id",[verifyToken],updateTicketById)
 }
