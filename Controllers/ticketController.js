@@ -20,6 +20,8 @@ exports.createTicket = async (req,res)=>{
         userStatus:userStatus.approved
     });
 
+    console.log(engineer);
+
     ticketObj.assignee = engineer.userId;
 
     try{

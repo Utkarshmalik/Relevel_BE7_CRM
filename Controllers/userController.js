@@ -56,6 +56,12 @@ exports.updateUser = async (req,res)=>{
     if(req.body.status === userStatus.approved){
         savedUser.userStatus = userStatus.approved;
     }
+    else if(req.body.status === userStatus.pending){
+        savedUser.userStatus= userStatus.pending
+    }
+    else if(req.body.status === userStatus.rejected){
+        savedUser.userStatus= userStatus.rejected
+    }
 
     const updatedUser = await savedUser.save();
 
